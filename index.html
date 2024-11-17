@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EnR GrandEst</title>
+    <link rel="stylesheet" href="ol.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="ol.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <link rel="stylesheet" href="style_data_grandest.css">
+    <style>
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1 class = "title-head">La production et la consommation d'énergies renouvlables dans le Grand Est</h1>
+        <button class="setting-button" id="settingsButton">Information</button>
+    </header>
+    
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup-content">
+            <p class = "bold-black">Ce site s'inscrit dans la participation au Concours de Visualisation DataGrandEst édition 2024. <br><br>Les données utilisées pour la création de ce site ont été produites par ATMO Grand Est.</p>
+            <button class="close-button" id="closePopupButton">Fermer</button>
+        </div>
+    </div>
+
+    <!-- Section 1 (conteneur principal) -->
+    <div class="container" id="section1">
+        <!-- Sidebar avec le bouton plus haut (première section) -->
+        <div class="sidebar first">
+            <h1 class="bold-white-title">Production et consommation d'énergie et ratio EnR des EPCIs du Grand Est (2019 à 2022)</h1>
+            <p class="bold-white">Avec cette première carte nous vous invitons à prendre en main les données présentées dans le cadre du Concours de Datavisualisation Grand Est. En survolant les entités avec la souris vous pourrez découvrir le taux de production d'énergies renouvlables (EnR), la consommmation d'énergie (EnR ou non) et la part d'EnR dans la consommation finale d'énergie pour chaque EPCI. </p> <!-- Ajout du texte ici -->
+            <!-- Bouton qui déclenche le défilement vers la section suivante -->
+            <div class="button" id="scrollButton1">
+                <span class="arrow"></span>
+                <span class="text">Carte suivante</span>
+            </div>
+        </div>
+
+        <!-- Main (contenu principal) -->
+        <div class="main">
+            <div class="map-container">
+                <div id="map1"></div>
+            </div>
+            <div id="tooltip" class="tooltip"></div>
+
+            <div id="barchart-container" class="story-container">
+                <div class="story-title">Production par année (GWh)</div>
+                <svg id="barchart"></svg>
+                <div class="barchart-ratio">
+                    <div class="story-title">Ratio ENR par année (%)</div>
+                    <svg id="barchart-ratio"></svg>
+                </div>
+                <div class="barchart-conso">
+                    <div class="story-title">Consommation par année (MWh)</div>
+                    <svg id="barchart-conso"></svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 2 (conteneur principal) -->
+    <div class="container" id="section2">
+        <!-- Sidebar avec le bouton plus haut (deuxième section) -->
+        <div class="sidebar second">
+            <h1 class="bold-white-title">Classification des EPCIs en fonction de leur tendance productive</h1>
+            <p class="bold-white">
+            La deuxième carte présente les specialités des EPCI en fonction du type d'énergie produit (Electricité, Thermique, Carburant) à partir de ressources renouvlables (exemple: éolien, biogaz, énergie solaire...). La classification est issue d'une analyse en composante mixte (ACM) puis d'une classification hierarchique ascendante (CAH). Plus d'infos sur la méthode.
+            <span class="tooltip-text-trigger">Plus d'infos sur la méthode</span> 
+            <span class="tooltip-text">
+                L'Analyse en Composantes Mixtes (ACM) et la Classification Ascendante Hiérarchique (CAH) sont deux méthodes statistiques. L'ACM crée des composantes qui représentent les principales relations entre les variables. Puis la CAH regroupe les composantes en fonction de leurs similarités et les classe selon leur influence dans le jeu de données.  Ainsi, la combinaison de l'ACM et de la CAH permet de mettre en avant les grandes tendances productives de chaque EPCI.
+            </span>    
+            <br><br>
+            On remarque une forte spécialisation dans la production d'électricité et de chaleur pour la majorité des EPCI. Une tendance Est-Ouest se dégage, avec une spécialisation dans la production de chaleur à l'Est et des EPCI majoritairement spécialisés dans la production d'électricité à l'Ouest.  </p> <!-- Ajout du texte ici -->
+            <!-- Bouton qui déclenche le défilement vers la section précédente -->
+            <div class="button" id="scrollButton2">
+                <span class="arrow"></span>
+                <span class="text">Carte suivante</span>
+            </div>
+        </div>
+
+        <!-- Main (contenu principal) -->
+        <div class="main">
+            <!-- Carte pour section 2 -->
+            <div class="map-container">
+                <div id="map2"></div> <!-- Carte pour section 2 -->
+                
+            <div id="legend" class="legend">
+            <h4>Légende EPCI</h4>
+            <p id="legend-text">Survolez un EPCI pour afficher les informations.</p>
+            </div>
+            <!-- Légende statique qui affiche les classes -->
+            <div id="legend-container" class="legend-container"></div>
+                 <!-- Curseur temporel -->
+            
+            </div>
+           
+        </div>
+    </div>
+    
+    <!-- Section 3 (conteneur principal) -->
+    <div class="container" id="section3">
+        <!-- Sidebar avec le bouton plus haut (deuxième section) -->
+        <div class="sidebar third">
+            <h1 class="bold-white-title"> Emissions de CO2 (hors biomasse et indirect) par habitant pour l'année 2022</h1>
+            <p class="bold-white">Cette représentation 3D met en valeur les émissions de CO2 par habitant dans chaque EPCI. La hauteur des entités est proportionnelle aux émissions de CO2.
+            <br><br>
+            Les valeurs se situent entre 1.92 et 47.82 t/hab. En moyenne un habitant du Grand Est émet 6 tonnes de CO2 en 2022. La médiane se situe quant à elle à 4,5 t/hab, c'est-à-dire que la moitié de la population du Grand Est est en dessous et l'autre moitié au dessus de cette valeur. 
+            <br><br>
+            Via cette interface il est possible de déplacer (clic droit enfoncé) et de faire pivoter la carte (clic gauche enfoncé). Il suffit de survoler les EPCI pour connaitre les émissions de CO2/hab. 
+            </p>
+            <!-- Bouton qui déclenche le défilement vers la section précédente -->
+            <div class="button" id="scrollButton3">
+                <span class="arrow"></span>
+                <span class="text">Retour</span>
+            </div>
+        </div>
+
+        <!-- Main (contenu principal) -->
+        <div class="main">
+
+                 <div class="flourish-embed flourish-map" data-src="visualisation/20305541"><script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img src="https://public.flourish.studio/visualisation/20305541/thumbnail" width="100%" alt="map visualization" /></noscript></div>
+
+                        <div class="image-container">
+                <img src="legend.PNG" alt="Légende" class="legend-image">
+         <div class="image-text-container">
+        <!-- Texte à gauche de l'image -->
+        <p class="co2-text"> Émissions de CO2 en tonnes </p>
+            </div>
+        </div>
+            <!-- Carte pour section 2 -->
+        </div>
+    </div>
+
+
+    
+    <script src="js_data_grandest.js"></script>
+</body>
+</html>

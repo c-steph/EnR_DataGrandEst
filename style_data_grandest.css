@@ -1,0 +1,406 @@
+ /* Styles généraux */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            height: 100%;
+        }
+
+        /* Header */
+        header {
+            background-color: #6DA095;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            font-size: 1.5em;
+            height: 10%;
+        }
+
+       /* Section 1 (conteneur principal) */
+        .container {
+            display: flex;
+            flex-wrap: nowrap;
+            height: 100%;  /* Section 1 prend toute la hauteur de la fenêtre */
+            overflow: hidden; /* Empêche le débordement */
+        }
+
+        /* Section 2 (conteneur principal) */
+        #section2 {
+            display: flex;
+            flex-wrap: nowrap;
+            height: 100%;  /* Section 2 prend également toute la hauteur de la fenêtre */
+            overflow: hidden; /* Empêche le débordement */
+        }
+        
+        /* Section 3 (conteneur principal) */
+        #section3 {
+            display: flex;
+            flex-wrap: nowrap;
+            height: 100%;  /* Section 2 prend également toute la hauteur de la fenêtre */
+            overflow: hidden; /* Empêche le débordement */
+        }
+
+        .sidebar {
+            width: 20%;
+            background-color: #A1C69E;
+            padding: 15px;
+            border-right: 2px solid #ddd;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Placer les éléments en haut */
+            height: 100%;  /* Prendre toute la hauteur disponible */
+            position: relative;
+        }
+
+        /* Main (contenu principal) */
+        .main {
+            width: 80%;
+            padding: 20px;
+            height: 100%;  /* S'assurer que le contenu prend toute la hauteur restante */
+            position: relative; /* Important pour positionner correctement les autres éléments */
+        }
+
+        /* Styles du bouton */
+        .button {
+            position: absolute;
+            top: 75px;
+            width: 50px;
+            height: 50px;
+            background-color: #285D66;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #285D66;
+            font-size: 18px;
+            cursor: pointer;
+            transition: width 0.3s ease, background-color 0.3s ease, border-radius 0.3s ease;
+            overflow: hidden;
+            text-decoration: none; /* Enlève le soulignement */
+            margin-top: 650px; /* Espacement entre les boutons */
+        }
+
+        .button .text {
+            position: absolute;
+            opacity: 0;
+            white-space: nowrap;
+            padding-left: 10px;
+            transition: opacity 0.3s ease;
+        }
+
+        .button .arrow {
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 8px solid #E1DF66;
+            transition: opacity 0.3s ease;
+        }
+
+        .button:hover {
+            width: 170px;
+            background-color: #E1DF66;
+            border-radius: 25px;
+        }
+
+        .button:hover .text {
+            opacity: 1;
+        }
+
+        .button:hover .arrow {
+            opacity: 0;
+        }
+        
+        #scrollButton2,#scrollButton3{
+            position: absolute;
+            margin-top: 750px;
+        }
+
+        /* Carte */
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        #map1 {
+            width: 100%;
+            height: 100%; /* Utilise toute la hauteur disponible dans la section main */
+            position: absolute; /* Permet de superposer les graphiques au-dessus */
+            top: 0;
+            left: 0;
+            z-index: 1; /* Assurer que la carte soit en dessous des autres éléments */
+        }
+        
+        #map2 {
+        width: 100%;
+        height: 100%; /* Assurez-vous que la carte occupe toute la hauteur disponible */
+        position: absolute; /* Permet d'être bien positionnée dans le conteneur */
+        top: 0;
+        left: 0;
+        z-index: 1; /* Garantit que la carte reste derrière les autres éléments */
+        }
+        
+        
+        .flourish-embed {
+            position: absolute;
+            top: 100px;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+        }
+        
+        
+        /* Conteneur de l'histoire avec les graphiques */
+        .story-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            max-width: 300px;
+            font-family: Arial, sans-serif;
+            z-index: 2; /* Assurer que le contenu des graphiques soit au-dessus de la carte */
+        }
+
+        #barchart-container {
+            position: absolute;
+            top: 75px; /* Ajuste en fonction de l'espace nécessaire */
+            left: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            width: 250px;
+            height: 750px;
+            z-index: 2; /* S'assurer que le graphique soit au-dessus de la carte */
+            font-family: Arial, sans-serif;
+        }
+
+        svg {
+            width: 100%;
+            height: 200px;
+        }
+
+        .barchart-ratio, .barchart-conso {
+            margin-top: 50px;
+        }
+
+        #tooltip {
+            position: absolute;
+            background: rgba(50, 50, 50, 0.8);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            pointer-events: none;
+            font-family: Arial, sans-serif;
+            font-size: 0.9em;
+            display: none;
+            z-index: 10;
+        }
+        
+         /* Curseur de temps */
+        .time-slider {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            z-index: 10;
+        }
+
+        #year-range {
+            width: 200px;
+        }
+
+        #year-value {
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        
+        /* Légende */
+        .legend {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border: 
+            border-radius: 8px;
+            width: 250px;
+            font-family: Arial, sans-serif;
+            z-index: 2; /* Assurer que la légende soit au-dessus de la carte */
+        }
+
+        .legend h4 {
+            margin-top: 0;
+        }
+
+        .legend p {
+            font-size: 1em;
+            margin: 5px 0;
+        }
+        
+        .bold-white {
+            font-size: 20px;
+            color: white;
+        }
+        
+        .bold-white-title {
+            font-weight: bold;
+            font-size: 25px;
+            color: white;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .setting-button {
+            position: absolute;
+            right: 20px;
+            top:45px;
+            transform: translateY(-50%);
+            background-color: #E1DF66;
+            color: #285D66;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .popup-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 4px 8 px rgba(0,0,0,0.2);
+        }
+        
+        .close-button {
+            background-color: #E1DF66;
+            color: #285D66;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor:pointer;
+            margin-top: 10px;
+        }
+        
+        .title-head {
+            position: relative;
+            font-weight: bold;
+            font-size: 40px;
+            color: white;
+            text-align: center;
+            margin-top: -5px;
+        }
+
+        /* Conteneur pour l'image */
+        .image-container {
+            position: absolute; /* Permet de positionner l'image précisément */
+            bottom: 20px; /* Espacement depuis le bas de la sidebar */
+            right: 20px; /* Espacement depuis la droite de la sidebar */
+        }
+
+        /* Image elle-même */
+        .legend-image {
+            width: 100px; /* Ajuste la largeur de l'image selon ce que tu souhaites */
+            height: auto; /* Conserve les proportions */
+            border-radius: 8px; /* Optionnel pour des coins arrondis */
+        }
+        /* Style pour le texte */
+        .co2-text {
+            font-size: 18px; /* Taille du texte */
+            margin-right: 10px; /* Espace entre le texte et l'image */
+            font-weight: bold; /* Met le texte en gras */
+        }
+        /* Style pour l'élément déclencheur du tooltip */
+        .tooltip-text-trigger {
+            color: #007bff; /* Coloration bleue pour indiquer que c'est interactif */
+            text-decoration: underline; /* Texte souligné pour l'interaction */
+            cursor: pointer; /* Le curseur change pour indiquer que c'est cliquable */
+        }
+
+        /* Le texte du tooltip caché par défaut */
+        .tooltip-text {
+            display: none; /* Le texte est caché au départ */
+            position: absolute; /* Positionner le texte de manière absolue */
+            background-color: #333; /* Couleur de fond du tooltip */
+            color: #fff; /* Couleur du texte */
+            padding: 10px; /* Espace autour du texte */
+            border-radius: 5px; /* Coins arrondis */
+            width: 300px; /* Largeur du tooltip */
+            top: 25px; /* Position du texte au-dessus */
+            left: 0;
+            z-index: 10; /* S'assurer qu'il est au-dessus des autres éléments */
+            font-size: 14px; /* Taille du texte */
+        }
+
+        /* Quand on survole le texte déclencheur, afficher le tooltip */
+        .tooltip-text-trigger:hover + .tooltip-text {
+            display: block; /* Affiche le texte du tooltip */
+        }
+
+        /* Légende dynamique */
+        #legend-text {
+            font-size: 14px;
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Style pour la légende statique en bas à droite */
+        .legend-container {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.8); /* Fond blanc semi-transparent */
+            border: 1px solid #ccc; /* Bordure fine grise */
+            border-radius: 5px; /* Coins arrondis */
+            padding: 10px;
+            font-size: 14px;
+            z-index: 1000; /* Priorité d'affichage */
+            max-width: 300px; /* Largeur maximale pour éviter les débordements */
+        }
+
+        /* Style pour chaque élément de la légende */
+        .legend-item {
+            display: flex;
+            align-items: center; /* Aligne les éléments au centre verticalement */
+            margin-bottom: 5px;
+        }
+
+        .legend-color-box {
+            width: 20px; /* Taille fixe pour le carré de couleur */
+            height: 20px; /* Taille fixe pour le carré de couleur */
+            margin-right: 10px; /* Espacement entre le carré et le texte */
+            flex-shrink: 0; /* Empêche la réduction de la taille du carré */
+        }
+
+        .legend-text {
+            line-height: 1.4; /* Espacement vertical pour améliorer la lisibilité */
+            word-wrap: break-word; /* Permet de couper les mots trop longs */
+        }
