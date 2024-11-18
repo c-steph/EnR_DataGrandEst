@@ -1,4 +1,4 @@
-var minProd = 0;
+        var minProd = 0;
         var maxProd = 1000;
 
         function getColorFromProd(prod) {
@@ -380,7 +380,7 @@ map2.getLayers().item(0).getSource().on('featuresloadend', function () {
             let zoomLevel = 1;
 
             if (screenWidth < 2000) { // Écran d'ordinateur portable
-                zoomLevel = 0.7; // Dézoomer à 90%
+                zoomLevel = 0.8; // Dézoomer à 90%
             }
 
             document.body.style.zoom = zoomLevel; // Appliquer le zoom
