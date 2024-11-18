@@ -372,4 +372,24 @@ map2.getLayers().item(0).getSource().on('featuresloadend', function () {
                 this.style.display = "none";
             }
         });
+
+        function adjustZoomForLaptop() {
+            const screenWidth = window.innerWidth;
+
+            // Ajuster le zoom selon la largeur
+            let zoomLevel = 1;
+
+            if (screenWidth < 2000) { // Écran d'ordinateur portable
+                zoomLevel = 0.7; // Dézoomer à 90%
+            }
+
+            document.body.style.zoom = zoomLevel; // Appliquer le zoom
+        }
+
+        // Appliquer la mise à jour au chargement
+        window.onload = adjustZoomForLaptop;
+
+        // Appliquer la mise à jour lors du redimensionnement
+        window.onresize = adjustZoomForLaptop;
+
         
